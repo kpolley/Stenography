@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/global.css">
+  </head>
+  <h1>
+    Stenography
+  </h1>
+  <p>
+    Stenography is the practice concealing a message within another message or object. Simply put, it is hiding information in plain sight such that only the intended recipient would get to see it. 
+  </p>
+  <p>
+    One common (and fun) form of stenography is to embed a message into an image. This works by replacing a handful of image bits with that of the message. It barely alters the image itself and the modification cannot be seen by the human eye. 
+  </p>
+  <p>
+    Below you can upload your own image to encode/decode messages!
+  </p>
+
+<div class="flex-container">
+
+  <div class="flex-child center">
+    <h3>Encode</h2>
+    
+    <form
+      enctype="multipart/form-data"
+      action="/encode"
+      method="post"
+    >
+      <div class="section">
+        <input type="file" name="image" />
+      </div>
+      <div class="section">
+        <textarea name="message" placeholder="secret message..."></textarea>
+      </div>
+
+      <div class="section">
+        <input type="submit" value="encode" />
+      </div>
+      
+    </form>
+  </div>
+  
+  <div class="flex-child center">
+    <h3>Decode</h2>
+    
+    <form
+      enctype="multipart/form-data"
+      action="/decode"
+      method="post"
+    >
+      <div class="section">
+        <input type="file" name="image" />
+      </div>
+
+      <div class="section">
+        <input type="submit" value="decode" />
+      </div>
+      
+    </form>
+  </div>
+  
+</div>
+
+<!--   
+  <body>
+    <form
+      enctype="multipart/form-data"
+      action="/"
+      method="post"
+    >
+      <input type="file" name="image" />
+      <input type="text" name="message" />
+      <input type="submit" value="upload" />
+    </form>
+  </body> -->
+</html>
