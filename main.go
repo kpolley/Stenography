@@ -6,7 +6,9 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello, World!")
+	fmt.Println("Initializing Endpoints")
   http.InitEndpoints()
+
+  fmt.Println("Starting Server")
   http.StartServer()
 }

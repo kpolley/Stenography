@@ -4,9 +4,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="/assets/global.css">
   </head>
-  <body>
-    <img src=data:{{.image}} alt={{.image}}>
+  <div class="center">
+    <img src=data:{{.image}}>
     <p>{{.message}}</p>
-    <p>{{.image}}</p>
-  </body>
+    <form action="/">
+      <input type="submit" value="Home" />
+    </form>
+  </div>
 </html>
