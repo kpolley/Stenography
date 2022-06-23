@@ -26,19 +26,20 @@ textarea {
   height: 100px;
 }
 
-/* .flex-container {
-    display: flex;
-}
-
-.flex-child {
-    flex: 1;
-    border: 2px solid black;
-}  
-
-.flex-child:first-child {
-    margin-right: 20px;
-} */
-
 .section {
   padding: 20px;
+}
+
+.center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.celebrate-text {
+  color: white;
+  font-size: 40;
 }

@@ -73,6 +73,12 @@ func InitEndpoints() {
   // decode
   http.HandleFunc("/decode", handleDecode)
 
+  // celebrate
+	http.HandleFunc("/celebrate", func(w http.ResponseWriter, r *http.Request) {
+		homeTemplate := template.Must(template.ParseFiles("templates/celebrate.html"))
+		homeTemplate.Execute(w, nil)
+	})
+
   // css
   http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 
