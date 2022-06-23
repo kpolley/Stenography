@@ -5,8 +5,10 @@ import (
   "bytes"
 	"net/http"
   "image"
+  "image/png"
+  "image/jpeg"
   "github.com/auyer/steganography"
-  "fmt"
+  "log"
 )
 
 func ToBase64(imageBytes []byte) string {
@@ -25,24 +27,49 @@ func ToBase64(imageBytes []byte) string {
 }
 
 func Encode(outBytes *[]byte, imageBytes []byte, message string) {
+  var img image.Image
+  var err error
+  
   reader := bytes.NewReader(imageBytes)
-  img, _, err := image.Decode(reader)
+
+  mimeType := http.DetectContentType(imageBytes)
+	switch mimeType {
+	  case "image/jpeg":
+		  img, err = jpeg.Decode(reader)
+	  case "image/png":
+		  img, err = png.Decode(reader)
+	}
+  
   if err != nil {
-    fmt.Printf("Error converting file to image %v", err)
+    log.Fatalf("Error converting file to image %v", err)
   }
 
   w := new(bytes.Buffer)
   err = steganography.Encode(w, img, []byte(message))
   if err != nil {
-    fmt.Printf("Error Encoding file %v", err)
+    log.Fatalf("Error Encoding file %v", err)
   }
 
   *outBytes = w.Bytes()
 }
 
 func Decode(imageBytes []byte) string {
+  var img image.Image
+  var err error
+  
   reader := bytes.NewReader(imageBytes)
-  img, _, _ := image.Decode(reader)
+
+  mimeType := http.DetectContentType(imageBytes)
+	switch mimeType {
+	  case "image/jpeg":
+		  img, err = jpeg.Decode(reader)
+	  case "image/png":
+		  img, err = png.Decode(reader)
+	}
+
+  if err != nil {
+    log.Fatalf("Error converting file to image %v", err)
+  }
 
   sizeOfMessage := steganography.GetMessageSizeFromImage(img)
   msg := steganography.Decode(sizeOfMessage, img)
